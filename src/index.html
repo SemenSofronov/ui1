@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+            integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+            crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                <img src="../asset/professor.svg">
+            </div>
+            <div class="header__title">Образование наше всё</div>
+            <div class="header__menu">
+                <div class="header__menu__icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="header__menu__links">
+                    <a class="header__menu__links-item" href="/">вход</a>
+                    <a class="header__menu__links-item" href="/">регистрация</a>
+                    <a class="header__menu__links-item" href="/">подписаться на RSS</a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="menu">
+        <div class="menu__container">
+            <a class="menu__links-item" href="/">главная</a>
+            <a class="menu__links-item" href="/">расписание</a>
+            <a class="menu__links-item" href="/">события и новости</a>
+            <a class="menu__links-item" href="/">научная конференция</a>
+        </div>
+    </div>
+    <main class="content">
+        <article>
+            <h4>
+                Расписание зачётов/экзаменов
+            </h4>
+        </article>
+        <div class="list">
+            <div id='app'>
+                <div v-for="item in content">
+                    <div class="item">
+                        <div class="item__image">
+                            <template v-if="item.faculty === 'Факультет информатики'">
+                                <img src="../asset/mortarboard.svg">
+                            </template>
+                            <template v-else>
+                                <img src="../asset/glasses.svg">
+                            </template>
+                        </div>
+                        <div class="item__class">
+                            <h4>{{item.class}} курс</h4>
+                        </div>
+                        <div class="item__content_column">
+                            <div class="item__name_song">{{item.teacher}} - {{item.subject}}</div>
+                            <div class="item__name_album"> {{item.room}} - {{item.building}}</div>
+                        </div>
+                        <div class="item__content_column">
+                            <div class="item__name_album"> {{item.date}} - {{item.time}}</div>
+                            <div class="item__name_album"> {{item.group}} - {{item.faculty}}</div>
+                        </div>
+                        <div class="item__completed">
+                            <template v-if="item.completed === true">
+                                <button class="button__green" onclick="changeActivity(this)"></button>
+                            </template>
+                            <template v-else>
+                                <button class="button__yellow" onclick="changeActivity(this)"></button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__copyright">
+            <p>© SSofronov 2018</p>
+        </div>
+        <div class="footer__container">
+            <a class="footer__links-item" href="/">контакты</a>
+            <a class="footer__links-item" href="/">помощь</a>
+            <a class="footer__links-item" href="/">партнерские продукты</a>
+        </div>
+
+    </footer>
+</div>
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            content: [
+                {
+                    teacher: 'Иванов И.А.',
+                    room: '410',
+                    subject: 'Увлекательная информатика',
+                    date: '05.01.2018',
+                    time: '10:00',
+                    building: '14',
+                    group: '6100',
+                    faculty: 'Факультет информатики',
+                    class: '1',
+                    completed: true
+                },
+                {
+                    teacher: 'Иванов И.А.',
+                    room: '410',
+                    subject: 'Увлекательная информатика',
+                    date: '06.01.2018',
+                    time: '10:00',
+                    building: '14',
+                    group: '5100',
+                    faculty: 'Факультет электроники',
+                    class: '1',
+                    completed: true
+                },
+                {
+                    teacher: 'Грознин В.А.',
+                    room: '415',
+                    subject: 'Основы механики',
+                    date: '08.01.2018',
+                    time: '10:00',
+                    building: '5',
+                    group: '6200',
+                    faculty: 'Факультет информатики',
+                    class: '2',
+                    completed: true
+                },
+                {
+                    teacher: 'Грознин В.А.',
+                    room: '415',
+                    subject: 'Основы механики',
+                    date: '08.01.2018',
+                    time: '15:00',
+                    building: '5',
+                    group: '6200',
+                    faculty: 'Факультет электроники',
+                    class: '2',
+                    completed: true
+                },
+                {
+                    teacher: 'Шишова Е.И.',
+                    room: '233',
+                    subject: 'Бухгалтерский учёт',
+                    date: '10.01.2018',
+                    time: '10:00',
+                    building: '3',
+                    group: '6300',
+                    faculty: 'Факультет информатики',
+                    class: '3',
+                    completed: false
+                },
+                {
+                    teacher: 'Шишова Е.И.',
+                    room: '233',
+                    subject: 'Бухгалтерский учёт',
+                    date: '10.01.2018',
+                    time: '16:00',
+                    building: '3',
+                    group: '5300',
+                    faculty: 'Факультет электроники',
+                    class: '3',
+                    completed: false
+                },
+                {
+                    teacher: 'Шишова Е.И.',
+                    room: '233',
+                    subject: 'Бухгалтерский учёт',
+                    date: '11.01.2018',
+                    time: '16:00',
+                    building: '3',
+                    group: '5400',
+                    faculty: 'Факультет электроники',
+                    class: '4',
+                    completed: false
+                },
+                {
+                    teacher: 'Шишова Е.И.',
+                    room: '233',
+                    subject: 'Бухгалтерский учёт',
+                    date: '12.01.2018',
+                    time: '16:00',
+                    building: '3',
+                    group: '5500',
+                    faculty: 'Факультет электроники',
+                    class: '5',
+                    completed: false
+                },
+                {
+                    teacher: 'Селантьев О.Ю.',
+                    room: '555',
+                    subject: 'Философия',
+                    date: '15.01.2018',
+                    time: '10:00',
+                    building: '1',
+                    group: '5100',
+                    faculty: 'Факультет электроники',
+                    class: '1',
+                    completed: false
+                },
+                {
+                    teacher: 'Селантьев О.Ю.',
+                    room: '555',
+                    subject: 'Философия',
+                    date: '15.01.2018',
+                    time: '11:00',
+                    building: '1',
+                    group: '6100',
+                    faculty: 'Факультет информатики',
+                    class: '1',
+                    completed: false
+                },
+                {
+                    teacher: 'Селантьев О.Ю.',
+                    room: '555',
+                    subject: 'Философия',
+                    date: '15.01.2018',
+                    time: '12:00',
+                    building: '1',
+                    group: '6200',
+                    faculty: 'Факультет информатики',
+                    class: '2',
+                    completed: false
+                },
+                {
+                    teacher: 'Селантьев О.Ю.',
+                    room: '555',
+                    subject: 'Философия',
+                    date: '15.01.2018',
+                    time: '13:00',
+                    building: '1',
+                    group: '6300',
+                    faculty: 'Факультет информатики',
+                    class: '3',
+                    completed: false
+                },
+                {
+                    teacher: 'Селантьев О.Ю.',
+                    room: '555',
+                    subject: 'Философия',
+                    date: '16.01.2018',
+                    time: '10:00',
+                    building: '1',
+                    group: '6400',
+                    faculty: 'Факультет информатики',
+                    class: '4',
+                    completed: false
+                }]
+        }
+    })
+</script>
